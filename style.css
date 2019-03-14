@@ -43,6 +43,15 @@ li p{
     font-weight: bold;
 }
 
-#budget-total{
+#recap{
     display: flex;
+    justify-content: space-between;
+}
+
+#recap input{
+    width : 70px;
+}
+
+#budget-total{
+    width : 300px;
 }
