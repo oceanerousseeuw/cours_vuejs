@@ -1,0 +1,48 @@
+ul, li{
+    list-style-type: none;
+}
+
+li{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+li p{
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.price{
+    width: 40px;
+}
+
+#good{
+    background-color: green;
+}
+
+#delete{
+    background-color: red;
+}
+
+#good, #delete{
+    border: none;
+    color: white;
+    padding: 5px;
+    width: 45px;
+}
+
+.good{
+    color: green;
+    font-weight: bold;
+}
+
+#budget-total{
+    display: flex;
+}
