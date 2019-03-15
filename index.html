@@ -13,15 +13,20 @@
 <div id="app">
     <h1>Ma liste de course</h1>
 
-    <input v-model="element" @keyup.enter="addOnList" placeholder="produit...">
-    <button @click="addOnList">Ajouter à la liste</button>
+    <input v-model="element" @keyup.enter="addOnList(element)" placeholder="produit...">
+    <button @click="addOnList(element)">Ajouter à la liste</button>
+    <div v-if="element">
+        <ul>
+            <li v-for="possibility in getFilteredPossibilities" @click="addOnList(possibility)">{{possibility}}</li>
+        </ul>
+    </div>
     <ul>
-        <li v-for="item in list" :elem="item" :key="item.id">
+        <li v-for="(item, id) in list" :elem="item" :key="id">
             <button id="good" @click="addOnBag(item)">Ok</button>
             <p :class="{good : item.good}">{{item.text}}
                 <input v-if="item.good" v-model="item.price" class="price" placeholder="prix">
             </p>
-            <button id="delete" @click="deleteFromList(item)">X</button>
+            <button id="delete" @click="deleteFromList(id)">X</button>
         </li>
     </ul>
     <div id="budget-total">

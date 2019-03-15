@@ -3,8 +3,10 @@ new Vue({
     data : {
         element : '',
         list:[],
-        budget: 0
+        budget: 0,
+        possibilities : ["tomate", "oignons", "pâtes", "aubergine", "boeuf", "pomme de terre", "lait", "beurre", "sauce", "ketchup", "piment", "pain", "pomme"]
     },
+    templates: "",
     computed : {
         getTotal : function(){
             let total = 0;
@@ -23,7 +25,11 @@ new Vue({
             }else{
                 return "";
             }
+        },
+        getFilteredPossibilities: function () {
+            return this.possibilities.filter(possibility => possibility.includes(this.element));
         }
+
     },
     mounted: function(){
         if (localStorage.getItem('list')) {
@@ -35,9 +41,10 @@ new Vue({
         }
     },
     methods: {
-        addOnList: function(){
-            this.list.push({text :this.element, price:"", good:false});
+        addOnList: function (item) {
+            this.list.push({text: item, price: "", good: false});
             this.addOnLocalStorage();
+            this.element = "";
         },
         addOnBag: function(item){
             for (let i = 0; i < this.list.length; i++) {
@@ -47,13 +54,16 @@ new Vue({
             }
             this.addOnLocalStorage();
         },
-        deleteFromList: function(index){
-            this.list.splice(index, 1);
+        deleteFromList: function(id){
+            this.list.splice(id, 1);
             this.addOnLocalStorage();
         },
         addOnLocalStorage(){
             const parsed = JSON.stringify(this.list);
             localStorage.setItem('list', parsed);
+        },
+        addOnInput() {
+            console.log('addOnInput');
         }
     }
 });
