@@ -25,9 +25,19 @@ new Vue({
             }
         }
     },
+    mounted: function(){
+        if (localStorage.getItem('list')) {
+            try {
+                this.list = JSON.parse(localStorage.getItem('list'));
+            } catch(e) {
+                localStorage.removeItem('list');
+            }
+        }
+    },
     methods: {
         addOnList: function(){
             this.list.push({text :this.element, price:"", good:false});
+            this.addOnLocalStorage();
         },
         addOnBag: function(item){
             for (let i = 0; i < this.list.length; i++) {
@@ -35,9 +45,15 @@ new Vue({
                     this.list[i].good = true;
                 }
             }
+            this.addOnLocalStorage();
         },
         deleteFromList: function(index){
             this.list.splice(index, 1);
+            this.addOnLocalStorage();
+        },
+        addOnLocalStorage(){
+            const parsed = JSON.stringify(this.list);
+            localStorage.setItem('list', parsed);
         }
     }
 });
